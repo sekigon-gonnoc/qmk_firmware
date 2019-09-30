@@ -9,15 +9,18 @@ The Unified firmware for sarasarado products.
 - cscs52
 - bootleg31 (BL31)
 - bootleg30 / soroban30 (BL30)
-- ally24 (AL24 / aka. Ç‡Ç§ÇøÇÂÇ¢ê‹ÇÍ)
-- ally13 (AL13 / aka. ÇøÇÂÇ¢ê‹ÇÍ)
+- ally24 (AL24 / aka. „ÇÇ„ÅÜ„Å°„Çá„ÅÑÊäò„Çå)
+- ally13 (AL13 / aka. „Å°„Çá„ÅÑÊäò„Çå)
 - ally13c
 - ally13s
 - cscs60
 
 Keyboard Maintainer: [_hatano_](https://github.com/hatanoh)
+
 Controller Supported: [BLE Micro Pro](https://github.com/sekigon-gonnoc/BLE-Micro-Pro) supported.
+
 Hardware Supported: [cscs familiy keyboards](https://github.com/hatanoh/cscs_family), [sarasarado 30% keyboards](https://github.com/hatanoh/30p) and other BMPization keyboards(maybe).
+
 Hardware Availability: N/A (Possibly can you buy it in the Yushakobo flea market?)
 
 Make example for this keyboard (after setting up your build environment):
