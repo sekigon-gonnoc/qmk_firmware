@@ -1,8 +1,12 @@
 # sarasarado_ble
 
-![cscs family keyboards](imgur.com image replace me!)
+cscs family keyboards(cscs64)
 
-![30% keyboards](imgur.com image replace me!)
+![cscs family keyboards](https://pbs.twimg.com/media/D7p1BB3UEAAaiHe?format=jpg&name=small)
+
+30% keyboards(soroban30/ally13/ally24)
+
+![30% keyboards](https://pbs.twimg.com/media/EDMGdGGUEAUrLr8?format=jpg&name=small)
 
 The Unified firmware for sarasarado products.
 - cscs64
@@ -15,7 +19,7 @@ The Unified firmware for sarasarado products.
 - ally13s
 - cscs60
 
-Keyboard Maintainer: [_hatano_](https://github.com/hatanoh)
+Keyboard Maintainer: [@\_hatano\_](https://github.com/hatanoh)
 
 Controller Supported: [BLE Micro Pro](https://github.com/sekigon-gonnoc/BLE-Micro-Pro) supported.
 
