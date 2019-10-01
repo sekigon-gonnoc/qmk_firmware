@@ -8,6 +8,10 @@ cscs family keyboards(cscs64)
 
 ![30% keyboards](https://pbs.twimg.com/media/EDMGdGGUEAUrLr8?format=jpg&name=small)
 
+30% keyboard(ally13c)
+
+![ally13c](https://pbs.twimg.com/media/EFxKThbVUAA1SAV?format=jpg&name=small)
+
 The Unified firmware for sarasarado products.
 - cscs64
 - cscs52
