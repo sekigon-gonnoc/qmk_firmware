@@ -17,8 +17,8 @@ The Unified firmware for sarasarado products.
 - cscs52
 - bootleg31 (BL31)
 - bootleg30 / soroban30 (BL30)
-- ally24 (AL24 / aka. „ÇÇ„ÅÜ„Å°„Çá„ÅÑÊäò„Çå)
-- ally13 (AL13 / aka. „Å°„Çá„ÅÑÊäò„Çå)
+- ally24 (AL24 / aka. ÇøÇÂÇ¢ê‹ÇÍ)
+- ally13 (AL13 / aka. Ç‡Ç§ÇøÇÂÇ¢ê‹ÇÍ)
 - ally13c
 - ally13s
 - cscs60

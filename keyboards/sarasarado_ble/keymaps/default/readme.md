@@ -13,21 +13,41 @@
 ## addtional key list
 |symbol|description|
 |------|-----------|
-|xEISU|EISU(闍ｱ謨ｰ)|
-|xKANA|KANA(縺九↑)|
+|xEISU|EISU(英数)|
+|xKANA|KANA(かな)|
 |SEL_BLE|select BLE connection|
 |SEL_USB|select USB connection|
 |TOG_HID|toggle HID connection(BLE / USB)|
-|ML0|momentary set ML0 layer|
-|ML1|momentary set ML1 layer|
-|ML2|momentary set ML2 layer|
-|ML3|momentary set ML3 layer|
-|m0SPC|tap space / press ML0 layer|
-|m1ENT|tap enter / press ML1 layer|
-|m1EISU|tap EISU(闍ｱ謨ｰ) / press ML1 layer|
-|m1KANA|tap KANA(縺九↑) / press ML1 layer|
-|m3EISU|tap EISU(闍ｱ謨ｰ) / press ML3 layer|
-|m3KANA|tap KANA(縺九↑) / press ML3 layer|
+|m0EISU|tap EISU(英数) / press layer #2|
+|m0KANA|tap KANA(かな) / press layer #2|
+|m1EISU|tap EISU(英数) / press layer #3|
+|m1KANA|tap KANA(かな) / press layer #3|
+|m2EISU|tap EISU(英数) / press layer #4|
+|m2KANA|tap KANA(かな) / press layer #4|
+|m3EISU|tap EISU(英数) / press layer #5|
+|m3KANA|tap KANA(かな) / press layer #5|
 
-if you press both ML0 and ML1, select ML2 layer.
+## m0SPCとm1ENT / ML0～ML3
+廃止された。LT() / MO() マクロを使用すること。
+LT()/MO()マクロを使用してもupdate_tri_layerの機能は動作する。
+他のレイヤとキーコードをTAP/LAYER機能で使用することができる。
 
+## define update_tri_layer function
+update_tri_layerを実行するときのレイヤーをTAPTERM.JSNで指定することができる。
+ANY(24320)とANY(24321)で設定した値のレイヤの両方を押したときに、ANY(24322)で設定された値のレイヤがオンになる。
+
+24320は0x5F00で現在使用されていない0x5C00-0x5FFFの範囲である。
+
+例
+
+'''
+{
+    "tapping_term":{
+	"ANY(24320)":2,
+	"ANY(24321)":3,
+	"ANY(24322)":4,
+	"KC_NO":200
+    }
+}
+'''
+レイヤ2とレイヤ3がオンになるとレイヤ4がオンになる(元の設定)

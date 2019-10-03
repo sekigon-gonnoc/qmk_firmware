@@ -29,17 +29,13 @@ enum custom_keycodes {
     SEL_USB,			// Select USB HID
     TOG_HID,			// Toggle BLE/USB HID
 
-    // momentary layer control
-    ML0,
-    ML1,
-    ML2,
-    ML3,
-
     // combination tap / layer
-    m0SPC,
-    m1ENT,
+    m0EISU,
+    m0KANA,
     m1EISU,
     m1KANA,
+    m2EISU,
+    m2KANA,
     m3EISU,
     m3KANA,
 
@@ -49,6 +45,8 @@ enum custom_keycodes {
 
 extern keymap_config_t keymap_config;
 
+#define LAYERSIZE 16
+
 enum layers {
     _BL0 = 0,		// Basic Layer
     _BL1,		// Altanative Layer (e.g. 10Key pad)
@@ -56,7 +54,6 @@ enum layers {
     _ML1,		// Lower / Syms
     _ML2,		// Adjust = Raise + Lower / Func = Nums + Syms
     _ML3,		// Config
-    _LAYERSIZE,
 };
 
 const key_string_map_t custom_keys_user =
@@ -66,8 +63,10 @@ const key_string_map_t custom_keys_user =
     .key_strings =
     "xEISU\0xKANA\0"
     "SEL_BLE\0SEL_USB\0TOG_HID\0"
-    "ML0\0ML1\0ML2\0ML3\0"
-    "m0SPC\0m1ENT\0m1EISU\0m1KANA\0m3EISU\0m3KANA\0"
+    "m0EISU\0m0KANA\0"
+    "m1EISU\0m1KANA\0"
+    "m2EISU\0m2KANA\0"
+    "m3EISU\0m3KANA\0"
 };
 
 ////////////////////////////////////////////////////////////////////////
@@ -75,7 +74,7 @@ const key_string_map_t custom_keys_user =
 static struct {
   bool pressed;
   uint16_t time;
-} layer_pressed[_LAYERSIZE];
+} layer_pressed[LAYERSIZE];
 
 static void set_keyevent(int layer, keyrecord_t *record)
 {
@@ -98,6 +97,7 @@ static bool set_layer(int layer, keyrecord_t *record);
 static void unset_layer(keyrecord_t *record);
 static bool set_layer_and_key(uint16_t keycode, int layer, uint16_t kc, keyrecord_t *record);
 static bool process_record_user_custom(uint16_t keycode, keyrecord_t *record);;
+static void update_tri_layer_user();
 ////////////////////////////////////////////////////////////////////////
 // 
 static bool set_layer(int layer, keyrecord_t *record)
@@ -108,7 +108,7 @@ static bool set_layer(int layer, keyrecord_t *record)
     layer_off(layer);
   }
   set_keyevent(layer, record);
-  update_tri_layer(_ML0, _ML1, _ML2);
+  update_tri_layer_user();
   return false;
 }
 
@@ -136,8 +136,30 @@ static bool set_layer_and_key(uint16_t keycode, int layer, uint16_t kc, keyrecor
     }
   }
   set_keyevent(layer, record);
-  update_tri_layer(_ML0, _ML1, _ML2);
+  update_tri_layer_user();
   return false;
+}
+
+#define LAYERx_CODE 0x5F00
+#define LAYERy_CODE 0x5F01
+#define LAYERz_CODE 0x5F02
+static bool get_param(uint16_t code, int *value)
+{
+  int v_no = get_tapping_term(KC_NO);
+  int v = get_tapping_term(code);
+
+  *value = v;
+  return v_no != v;
+}
+
+static void update_tri_layer_user()
+{
+  int x,y,z;
+
+  if (get_param(LAYERx_CODE, &x) &&
+      get_param(LAYERy_CODE, &y) &&
+      get_param(LAYERz_CODE, &z))
+    update_tri_layer(x, y, z);
 }
 ////////////////////////////////////////////////////////////////////////
 // custum key function
@@ -215,25 +237,28 @@ void matrix_init_user(void)
 bool process_record_user(uint16_t keycode, keyrecord_t *record)
 {
   switch (keycode) {
-    // layer function
-  case ML0:
-    return set_layer(_ML0, record);
-  case ML1:
-    return set_layer(_ML1, record);
-  case ML2:
-    return set_layer(_ML2, record);
-  case ML3:
-    return set_layer(_ML3, record);
+    // override MO() macro
+  case QK_MOMENTARY ... QK_MOMENTARY_MAX:
+    return set_layer(keycode & 0xF, record);
+
+    // override LT() macro
+  case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
+    return set_layer_and_key(keycode, 
+			     (keycode&0x0F00)>>8, keycode & 0xFF, record);
 
     // combine keycode and layer
-  case m0SPC:
-    return set_layer_and_key(keycode, _ML0, KC_SPC, record);
-  case m1ENT:
-    return set_layer_and_key(keycode, _ML1, KC_ENT, record);
+  case m0EISU:
+    return set_layer_and_key(keycode, _ML0, xEISU, record);
+  case m0KANA:
+    return set_layer_and_key(keycode, _ML0, xKANA, record);
   case m1EISU:
     return set_layer_and_key(keycode, _ML1, xEISU, record);
   case m1KANA:
     return set_layer_and_key(keycode, _ML1, xKANA, record);
+  case m2EISU:
+    return set_layer_and_key(keycode, _ML2, xEISU, record);
+  case m2KANA:
+    return set_layer_and_key(keycode, _ML2, xKANA, record);
   case m3EISU:
     return set_layer_and_key(keycode, _ML3, xEISU, record);
   case m3KANA:
