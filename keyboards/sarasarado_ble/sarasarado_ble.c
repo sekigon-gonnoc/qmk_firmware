@@ -14,10 +14,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "sarasarado_ble.h"
+#include <string.h>
 
 // Optional override functions below.
 // You can leave any or all of these undefined.
 // These are only required if you want to perform custom actions.
+
+////////////////////////////////////////////////////////////////////////
+void create_user_file()
+{
+  static const char fork_page[] = 
+    "<meta http-equiv=\"refresh\" content=\"0;URL=\'https://github.com/hatanoh/BMPCommonFirmware\'\"/>";
+  BMPAPI->usb.create_file("FORK    HTM", (uint8_t*)fork_page, strlen(fork_page));
+}
 
 /*
 

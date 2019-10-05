@@ -30,14 +30,15 @@ enum custom_keycodes {
     TOG_HID,			// Toggle BLE/USB HID
 
     // combination tap / layer
-    m0EISU,
-    m0KANA,
-    m1EISU,
-    m1KANA,
-    m2EISU,
-    m2KANA,
-    m3EISU,
-    m3KANA,
+    m00EISU, m01EISU, m02EISU, m03EISU,
+    m04EISU, m05EISU, m06EISU, m07EISU,
+    m08EISU, m09EISU, m10EISU, m11EISU,
+    m12EISU, m13EISU, m14EISU, m15EISU,
+
+    m00KANA, m01KANA, m02KANA, m03KANA,
+    m04KANA, m05KANA, m06KANA, m07KANA,
+    m08KANA, m09KANA, m10KANA, m11KANA,
+    m12KANA, m13KANA, m14KANA, m15KANA,
 
     // end
     END_KEYCODE,
@@ -47,15 +48,6 @@ extern keymap_config_t keymap_config;
 
 #define LAYERSIZE 16
 
-enum layers {
-    _BL0 = 0,		// Basic Layer
-    _BL1,		// Altanative Layer (e.g. 10Key pad)
-    _ML0,		// Raise / Nums
-    _ML1,		// Lower / Syms
-    _ML2,		// Adjust = Raise + Lower / Func = Nums + Syms
-    _ML3,		// Config
-};
-
 const key_string_map_t custom_keys_user =
 {
     .start_kc = BMP_SAFE_RANGE,
@@ -63,10 +55,16 @@ const key_string_map_t custom_keys_user =
     .key_strings =
     "xEISU\0xKANA\0"
     "SEL_BLE\0SEL_USB\0TOG_HID\0"
-    "m0EISU\0m0KANA\0"
-    "m1EISU\0m1KANA\0"
-    "m2EISU\0m2KANA\0"
-    "m3EISU\0m3KANA\0"
+
+    "m00EISU\0m01EISU\0m02EISU\0m03EISU\0"
+    "m04EISU\0m05EISU\0m06EISU\0m07EISU\0"
+    "m08EISU\0m09EISU\0m10EISU\0m11EISU\0"
+    "m12EISU\0m13EISU\0m14EISU\0m15EISU\0"
+
+    "m00KANA\0m01KANA\0m02KANA\0m03KANA\0"
+    "m04KANA\0m05KANA\0m06KANA\0m07KANA\0"
+    "m08KANA\0m09KANA\0m10KANA\0m11KANA\0"
+    "m12KANA\0m13KANA\0m14KANA\0m15KANA\0"
 };
 
 ////////////////////////////////////////////////////////////////////////
@@ -247,22 +245,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
 			     (keycode&0x0F00)>>8, keycode & 0xFF, record);
 
     // combine keycode and layer
-  case m0EISU:
-    return set_layer_and_key(keycode, _ML0, xEISU, record);
-  case m0KANA:
-    return set_layer_and_key(keycode, _ML0, xKANA, record);
-  case m1EISU:
-    return set_layer_and_key(keycode, _ML1, xEISU, record);
-  case m1KANA:
-    return set_layer_and_key(keycode, _ML1, xKANA, record);
-  case m2EISU:
-    return set_layer_and_key(keycode, _ML2, xEISU, record);
-  case m2KANA:
-    return set_layer_and_key(keycode, _ML2, xKANA, record);
-  case m3EISU:
-    return set_layer_and_key(keycode, _ML3, xEISU, record);
-  case m3KANA:
-    return set_layer_and_key(keycode, _ML3, xKANA, record);
+  case m00EISU ... m15EISU:
+    return set_layer_and_key(keycode, keycode-m00EISU, xEISU, record);
+  case m00KANA ... m15KANA:
+    return set_layer_and_key(keycode, keycode-m00KANA, xKANA, record);
 
     // special function key
   default:
