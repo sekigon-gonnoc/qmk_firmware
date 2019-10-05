@@ -56,7 +56,7 @@ ANY(24320),ANY(24321),ANY(24321)が定義されていない場合はupdate_tri_l
 ### m0KANA/m0EISU～m3KANA/m3EISU
 廃止された。
 xKANA/xEISUのコンビネーションは、m00KANA/m00EISU～m15KANA/m15EISUに置き換えられた。
-m_nn_の_nn_はオフセットはないため、m00KANAはKANAとレイヤ0のコンボになる。
+m_nn_の_nn_にオフセットはないため、m00KANAはKANAとレイヤ0のコンボになる。
 
 |old|new|
 |---|---|
