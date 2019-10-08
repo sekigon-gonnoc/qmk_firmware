@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#include "action_tapping.h"
 #include "bmp.h"
 #include "keycode_str_converter.h"
 #include <string.h>
@@ -117,7 +118,6 @@ static void unset_layer(keyrecord_t *record)
   }
 }
 
-extern uint16_t get_tapping_term(uint16_t keycode);
 static bool set_layer_and_key(uint16_t keycode, int layer, uint16_t kc, keyrecord_t *record)
 {
   if (record->event.pressed) {
