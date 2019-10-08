@@ -164,62 +164,58 @@ static void update_tri_layer_user()
 //
 static bool process_record_user_custom(uint16_t keycode, keyrecord_t *record)
 {
-  bool continue_process = process_record_user_bmp(keycode, record);
+  bool pressed = record->event.pressed;
 
-  if (continue_process) {
-    bool pressed = record->event.pressed;
-
-    switch (keycode) {
-      // eisu / kana
-    case xEISU:
-      if (pressed) {
-	if (keymap_config.swap_lalt_lgui){
-	  register_code(KC_LANG2);
-	} else {
-	  SEND_STRING(SS_LALT("`"));
-	}
+  switch (keycode) {
+    // eisu / kana
+  case xEISU:
+    if (pressed) {
+      if (keymap_config.swap_lalt_lgui){
+	register_code(KC_LANG2);
       } else {
-	unregister_code(KC_LANG2);
+	SEND_STRING(SS_LALT("`"));
       }
-      break;
-    case xKANA:
-      if (pressed) {
-	if (keymap_config.swap_lalt_lgui){
-	  register_code(KC_LANG1);
-	} else {
-	  SEND_STRING(SS_LALT("`"));
-	}
-      } else {
-	unregister_code(KC_LANG1);
-      }
-      break;
-
-      // special BLE key
-    case SEL_BLE:
-      if (pressed) {
-	set_ble_enabled(true);
-	set_usb_enabled(false);
-      }
-      break;
-    case SEL_USB:
-      if (pressed) {
-	set_ble_enabled(false);
-	set_usb_enabled(true);
-      }
-      break;
-    case TOG_HID:
-      if (pressed) {
-	bool ble = get_ble_enabled();
-
-	set_ble_enabled(!ble);
-	set_usb_enabled(ble);
-      }
-      break;
-
-      // other unspecial keys
-    default:
-      return true;
+    } else {
+      unregister_code(KC_LANG2);
     }
+    break;
+  case xKANA:
+    if (pressed) {
+      if (keymap_config.swap_lalt_lgui){
+	register_code(KC_LANG1);
+      } else {
+	SEND_STRING(SS_LALT("`"));
+      }
+    } else {
+      unregister_code(KC_LANG1);
+    }
+    break;
+
+    // special BLE key
+  case SEL_BLE:
+    if (pressed) {
+      set_ble_enabled(true);
+      set_usb_enabled(false);
+    }
+    break;
+  case SEL_USB:
+    if (pressed) {
+      set_ble_enabled(false);
+      set_usb_enabled(true);
+    }
+    break;
+  case TOG_HID:
+    if (pressed) {
+      bool ble = get_ble_enabled();
+
+      set_ble_enabled(!ble);
+      set_usb_enabled(ble);
+    }
+    break;
+
+    // other unspecial keys
+  default:
+    return process_record_user_bmp(keycode, record);
   }
   return false;
 }
@@ -242,13 +238,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
     // override LT() macro
   case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
     return set_layer_and_key(keycode, 
-			     (keycode&0x0F00)>>8, keycode & 0xFF, record);
+			     (keycode & 0x0F00)>>8, keycode & 0xFF, record);
 
     // combine keycode and layer
   case m00EISU ... m15EISU:
-    return set_layer_and_key(keycode, keycode-m00EISU, xEISU, record);
+    return set_layer_and_key(keycode, keycode - m00EISU, xEISU, record);
   case m00KANA ... m15KANA:
-    return set_layer_and_key(keycode, keycode-m00KANA, xKANA, record);
+    return set_layer_and_key(keycode, keycode - m00KANA, xKANA, record);
 
     // special function key
   default:

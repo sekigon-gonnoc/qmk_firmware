@@ -37,9 +37,9 @@
 	],
 	[
             "RESET",   "ADV_ID1", "ADV_ID2", "ADV_ID3", "ADV_ID4", "ADV_ID5",                       "DEL_ID1", "DEL_ID2", "DEL_ID3", "DEL_ID4", "DEL_ID5", "KC_NO",
-            "ENT_DFU", "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",   "MAGIC_UNSWAP_LALT_LGUI",
+            "ENT_DFU", "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",   "MAGIC_UNSWAP_ALT_GUI",
 	                                                                                 "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",
-	    "KC_TRNS", "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",   "MAGIC_SWAP_LALT_LGUI",
+	    "KC_TRNS", "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",   "MAGIC_SWAP_ALT_GUI",
                                                                                          "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",   "KC_TRNS",  
 	    "KC_TRNS", "SEL_BLE", "SEL_USB", "KC_NO",   "KC_NO",   "AD_WO_L", "BATT_LV", "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",   "KC_TRNS",  
             "KC_TRNS",            "KC_NO",   "KC_NO",   "KC_NO",   "KC_TRNS",                       "KC_TRNS", "KC_NO",   "KC_TRNS", "KC_NO",              "KC_TRNS", 

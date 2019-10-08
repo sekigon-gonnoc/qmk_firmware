@@ -27,8 +27,8 @@
 	],
 	[
             "KC_TRNS", "AD_WO_L", "ADV_ID0", "ADV_ID1", "ADV_ID2", "ADV_ID3", "ADV_ID4", "KC_NO",   "KC_NO",   "KC_NO",   "KC_NO",   "ENT_DFU",
-            "KC_TRNS", "SEL_BLE", "SEL_USB", "KC_NO",   "KC_NO",   "MAGIC_UNSWAP_LALT_LGUI",
-                                                                              "MAGIC_SWAP_LALT_LGUI", 
+            "KC_TRNS", "SEL_BLE", "SEL_USB", "KC_NO",   "KC_NO",   "MAGIC_UNSWAP_ALT_GUI",
+                                                                              "MAGIC_SWAP_ALT_GUI", 
                                                                                          "BATT_LV", "DF(1)",   "DF(0)",              "KC_TRNS",
             "KC_TRNS", "KC_TRNS", "KC_TRNS", "KC_TRNS", "KC_TRNS", "KC_TRNS", "KC_TRNS", "KC_TRNS", "KC_TRNS",                       "KC_TRNS",
 	                          "KC_TRNS", "KC_TRNS", "KC_TRNS",            "KC_TRNS", "KC_TRNS", "KC_TRNS"
