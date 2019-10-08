@@ -17,7 +17,18 @@
 |m15EISU|tap EISU(英数) / press layer #15|
 |m15KANA|tap KANA(かな) / press layer #15|
 
-## define update_tri_layer function
+## xKANA / xEISU
+漢字入力モードの切り替えに使用する。
+
+LALT_LGUI_SWAPの状態によって挙動が異なる。
+本ファームウェアでは一般的な既存ファームウェアと異なりOFFの時にWindows向けの動作になる。
+
+|LALT_LGUI_SWAP|xKANA|xEISU|
+|--------------|-----|-----|
+|OFF|ALT+`を入力|ALT+`を入力|
+|ON|KC_LANG1を入力|KC_LANG2を入力|
+
+## update_tri_layer()のパラメータ変更機能追加
 update_tri_layerを実行するときのレイヤーをTAPTERM.JSNで指定することができる。
 ANY(24320)とANY(24321)で設定した値のレイヤの両方を押したときに、ANY(24322)で設定された値のレイヤがオンになる。
 
