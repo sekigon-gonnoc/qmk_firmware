@@ -23,7 +23,7 @@
 #define CONFIG_I2C_ADDR2 0x10
 #endif
 
-static uint8_t i2c_temporary_buffer[4096];
+static uint8_t i2c_temporary_buffer[2048];
 
 static inline int i2c_init(void)
 {
