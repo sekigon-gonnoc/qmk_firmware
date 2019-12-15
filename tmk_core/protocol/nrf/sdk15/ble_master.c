@@ -1305,10 +1305,13 @@ void restart_advertising_id(uint8_t id) {
   m_whitelist_peer_cnt = (sizeof(m_whitelist_peers) / sizeof(pm_peer_id_t));
 
   peer_list_get(m_whitelist_peers, &m_whitelist_peer_cnt);
-  if (id > m_whitelist_peer_cnt) {
+  if (id >= m_whitelist_peer_cnt) {
     return;
   }
 #ifdef NRF_SEPARATE_KEYBOARD_MASTER
+  if (id == 0) {
+    return;
+  }
   m_whitelist_peer_cnt = 2;
   m_whitelist_peers[1] = m_whitelist_peers[id];
 #else
