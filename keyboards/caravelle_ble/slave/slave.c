@@ -17,7 +17,7 @@ matrix_row_t read_cols(void);
 
 static bool bootloader_flag = false;
 
-void matrix_init_user() {
+void matrix_init_kb() {
 
   // Set high-current drive mode
   for(int i=0; i<THIS_DEVICE_ROWS; i++) {
@@ -38,11 +38,13 @@ void matrix_init_user() {
   } else if (row == 0b10) {
     bootloader_flag = true;
   }
+  matrix_init_user();
 }
 
-void matrix_scan_user() {
+void matrix_scan_kb() {
  static int cnt;
  if (bootloader_flag && cnt++==500) {
    bootloader_jump();
  }
+ matrix_scan_user();
 }
