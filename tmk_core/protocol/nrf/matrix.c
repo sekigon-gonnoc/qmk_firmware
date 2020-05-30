@@ -120,6 +120,26 @@ matrix_row_t read_row(uint8_t row);
 #endif
 
 __attribute__ ((weak))
+void matrix_init_quantum(void) {
+    matrix_init_kb();
+}
+
+__attribute__ ((weak))
+void matrix_scan_quantum(void) {
+    matrix_scan_kb();
+}
+
+__attribute__ ((weak))
+void matrix_init_kb(void) {
+    matrix_init_user();
+}
+
+__attribute__ ((weak))
+void matrix_scan_kb(void) {
+    matrix_scan_user();
+}
+
+__attribute__ ((weak))
 void matrix_init_user(void) {
 }
 
@@ -403,11 +423,6 @@ uint8_t matrix_scan_impl(matrix_row_t* _matrix){
 }
 
 char str[16];
-
-__attribute__ ((weak))
-void matrix_scan_kb(void) {
-    matrix_scan_user();
-}
 
 uint8_t matrix_scan(void)
 {
