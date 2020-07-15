@@ -46,6 +46,10 @@ uint32_t timer_read32(void);
 uint16_t timer_elapsed(uint16_t last);
 uint32_t timer_elapsed32(uint32_t last);
 
+// Utility functions to check if a future time has expired & autmatically handle time wrapping if checked / reset frequently (half of max value)
+#define timer_expired(current, future) (((uint16_t)current - (uint16_t)future) < 0x8000)
+#define timer_expired32(current, future) (((uint32_t)current - (uint32_t)future) < 0x80000000)
+
 #ifdef __cplusplus
 }
 #endif

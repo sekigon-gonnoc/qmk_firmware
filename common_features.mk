@@ -102,6 +102,13 @@ ifeq ($(strip $(UNICODE_COMMON)), yes)
     SRC += $(QUANTUM_DIR)/process_keycode/process_unicode_common.c
 endif
 
+ifeq ($(strip $(OLED_DRIVER_ENABLE)), yes)
+    OPT_DEFS += -DOLED_DRIVER_ENABLE
+    COMMON_VPATH += $(DRIVER_PATH)/oled
+    QUANTUM_LIB_SRC += i2c_master.c
+    SRC += oled_driver.c
+endif
+
 ifeq ($(strip $(RGBLIGHT_ENABLE)), yes)
     OPT_DEFS += -DRGBLIGHT_ENABLE
     SRC += $(QUANTUM_DIR)/rgblight.c

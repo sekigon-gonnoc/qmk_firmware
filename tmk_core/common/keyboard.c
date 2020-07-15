@@ -157,6 +157,9 @@ void keyboard_init(void) {
   MCUCR |= _BV(JTD);
 #endif
     matrix_init();
+#ifdef OLED_DRIVER_ENABLE
+    oled_init(OLED_ROTATION_0);
+#endif
 #ifdef PS2_MOUSE_ENABLE
     ps2_mouse_init();
 #endif
@@ -216,7 +219,12 @@ void keyboard_task(void)
     uint8_t keys_processed = 0;
 #endif
 
+#if defined(OLED_DRIVER_ENABLE) && !defined(OLED_DISABLE_TIMEOUT)
+    uint8_t ret = matrix_scan();
+#else
     matrix_scan();
+#endif
+
     if (is_keyboard_master()) {
         for (uint8_t r = 0; r < MATRIX_ROWS; r++) {
             matrix_row = matrix_get_row(r);
@@ -269,6 +277,14 @@ MATRIX_LOOP_END:
 #ifdef MOUSEKEY_ENABLE
     // mousekey repeat & acceleration
     mousekey_task();
+#endif
+
+#ifdef OLED_DRIVER_ENABLE
+    oled_task();
+#    ifndef OLED_DISABLE_TIMEOUT
+    // Wake up oled if user is using those fabulous keys!
+    if (ret) oled_on();
+#    endif
 #endif
 
 #ifdef PS2_MOUSE_ENABLE
