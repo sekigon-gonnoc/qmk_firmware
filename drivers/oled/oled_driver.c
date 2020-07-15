@@ -144,7 +144,6 @@ static void InvertCharacter(uint8_t *cursor) {
 }
 
 bool oled_init(uint8_t rotation) {
-    NRF_LOG_INFO("oled_init(%u)", rotation);
     oled_rotation = oled_init_user(rotation);
     if (!HAS_FLAGS(oled_rotation, OLED_ROTATION_90)) {
         oled_rotation_width = OLED_DISPLAY_WIDTH;
@@ -207,7 +206,6 @@ bool oled_init(uint8_t rotation) {
     oled_initialized = true;
     oled_active      = true;
     oled_scrolling   = false;
-    NRF_LOG_INFO("OLED INIT");
     return true;
 }
 
@@ -598,7 +596,6 @@ uint8_t oled_max_lines(void) {
 }
 
 void oled_task(void) {
-    NRF_LOG_INFO("oled_task");
     if (!oled_initialized) {
         return;
     }

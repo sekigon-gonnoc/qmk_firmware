@@ -67,7 +67,6 @@
 static const nrfx_twim_t m_twim_master = NRFX_TWIM_INSTANCE(0);
 static int twim_complete = 0;
 void twim_evt_handler(nrfx_twim_evt_t const *p_event, void *p_context) {
-  NRF_LOG_INFO("TWIM Event:%d", p_event->type);
   twim_complete = p_event->type + 1;
 }
 
