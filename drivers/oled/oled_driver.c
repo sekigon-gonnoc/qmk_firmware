@@ -492,7 +492,7 @@ bool oled_on(void) {
     oled_timeout = timer_read32() + OLED_TIMEOUT;
 #endif
 
-    static const uint8_t display_on[] = {I2C_CMD, DISPLAY_ON};
+    uint8_t display_on[] = {I2C_CMD, DISPLAY_ON};
     if (!oled_active) {
         if (I2C_TRANSMIT_P(display_on) != I2C_STATUS_SUCCESS) {
             NRF_LOG_INFO("oled_on cmd failed\n");
@@ -504,7 +504,7 @@ bool oled_on(void) {
 }
 
 bool oled_off(void) {
-    static const uint8_t display_off[] = {I2C_CMD, DISPLAY_OFF};
+    uint8_t display_off[] = {I2C_CMD, DISPLAY_OFF};
     if (oled_active) {
         if (I2C_TRANSMIT_P(display_off) != I2C_STATUS_SUCCESS) {
             NRF_LOG_INFO("oled_off cmd failed\n");
@@ -536,7 +536,7 @@ void oled_scroll_set_speed(uint8_t speed) {
     // FrameRate128 speed = 2
     // FrameRate256 speed = 3
     // for ease of use these are remaped here to be in order
-    static const uint8_t scroll_remap[8] = {7, 4, 5, 0, 6, 1, 2, 3};
+    static uint8_t scroll_remap[8] = {7, 4, 5, 0, 6, 1, 2, 3};
     oled_scroll_speed                    = scroll_remap[speed];
 }
 
@@ -570,7 +570,7 @@ bool oled_scroll_left(void) {
 
 bool oled_scroll_off(void) {
     if (oled_scrolling) {
-        static const uint8_t display_scroll_off[] = {I2C_CMD, DEACTIVATE_SCROLL};
+        uint8_t display_scroll_off[] = {I2C_CMD, DEACTIVATE_SCROLL};
         if (I2C_TRANSMIT_P(display_scroll_off) != I2C_STATUS_SUCCESS) {
             NRF_LOG_INFO("oled_scroll_off cmd failed\n");
             return oled_scrolling;
@@ -616,7 +616,7 @@ void oled_task(void) {
 
     // Display timeout check
 #if OLED_TIMEOUT > 0
-    if (oled_active && timer_expired32(timer_read32(), oled_timeout)) {
+    if (oled_active && timer_read32() > oled_timeout) {
         oled_off();
     }
 #endif
@@ -635,7 +635,7 @@ void oled_task(void) {
 __attribute__((weak)) void oled_task_user(void) {}
 
 uint8_t oled_set_contrast(uint8_t contrast) {
-    uint8_t buf[2] = {0x81, 0};
+    uint8_t buf[2] = {CONTRAST, 0};
     buf[1] = contrast;
     return I2C_WRITE_REG(I2C_CMD, buf, 2);
 }
