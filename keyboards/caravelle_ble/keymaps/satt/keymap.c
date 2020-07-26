@@ -43,10 +43,12 @@ enum custom_keycodes {
     ENT_DFU,              /* Start bootloader                     */
     ENT_SLP,              /* Deep sleep mode                      */
     JIS2US,               /* JIS2US keycode                       */
-    LOWER,                /* Layer  keycode                       */
-    RAISE,                /* Layer  keycode                       */
-    P_LOWER,              /* Layer  keycode                       */
-    P_RAISE,              /* Layer  keycode                       */
+    LOWER,                /* Layer keycode                        */
+    RAISE,                /* Layer keycode                        */
+    P_LOWER,              /* Layer keycode                        */
+    P_RAISE,              /* Layer keycode                        */
+    QWERTY,               /* Default layer keycode                */
+    PSEU_US,              /* Default layer keycode                */
 };
 
 
@@ -63,8 +65,6 @@ enum {
 };
 
 // Layer related keycodes
-#define QWERTY DF(_QWERTY)
-#define PSEU_US DF(_PSEUDO_US)
 #define ADJUST  MO(_ADJUST)
 
 // Special keycodes
@@ -206,6 +206,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       } else {
         layer_off(_PSEUDO_US_RAISE);
         update_tri_layer(_PSEUDO_US_LOWER, _PSEUDO_US_RAISE, _ADJUST);
+      }
+      return false;
+      break;
+    case QWERTY:
+      if (record->event.pressed) {
+        default_layer_set(1UL<<_QWERTY);
+        layer_clear();
+      }
+      return false;
+      break;
+    case PSEU_US:
+      if (record->event.pressed) {
+        default_layer_set(1UL<<_PSEUDO_US);
+        layer_clear();
       }
       return false;
       break;
