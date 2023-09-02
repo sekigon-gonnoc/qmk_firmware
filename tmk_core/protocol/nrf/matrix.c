@@ -155,10 +155,10 @@ __attribute__((weak)) uint8_t matrix_scan_impl(matrix_row_t *_matrix) {
     if (debug_config.keyboard && matrix_changed > 0) {
         dprintf("device rows:\n");
         for (uint8_t idx = 0; idx < device_row; idx++) {
-            if (config->matrix.cols <= 8) {
+            if (device_col <= 8) {
                 dprintf("\tdr%02d:0x%02x\n", idx,
                         matrix_debouncing[idx + matrix_offset]);
-            } else if (config->matrix.cols <= 16) {
+            } else if (device_col <= 16) {
                 dprintf("\tdr%02d:0x%04x\n", idx,
                         matrix_debouncing[idx + matrix_offset]);
             } else {
@@ -183,10 +183,10 @@ __attribute__((weak)) uint8_t matrix_scan_impl(matrix_row_t *_matrix) {
 
     if (debug_config.keyboard && pop_cnt > 0) {
         dprintf("matrix rows:\n");
-        for (uint8_t idx = 0; idx < device_row; idx++) {
-            if (device_col <= 8) {
+        for (uint8_t idx = 0; idx < config->matrix.rows; idx++) {
+            if (config->matrix.cols <= 8) {
                 dprintf("\tr%02d:0x%02x\n", idx, _matrix[idx]);
-            } else if (device_col <= 16) {
+            } else if (config->matrix.cols <= 16) {
                 dprintf("\tr%02d:0x%04x\n", idx, _matrix[idx]);
             } else {
                 dprintf("\tr%02d:0x%08x\n", idx, _matrix[idx]);
